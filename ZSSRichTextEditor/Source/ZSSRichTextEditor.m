@@ -827,7 +827,7 @@ int textColorBGTag = 0;
     
     // Insert Link
     if ((_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarInsertLink]) || (_enabledToolbarItems && [_enabledToolbarItems containsObject:ZSSRichTextEditorToolbarAll])) {
-        ZSSBarButtonItem *insertLink = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSlink.png" inBundle:bundle compatibleWithTraitCollection:nil] style:UIBarButtonItemStylePlain target:self action:@selector(insertLink)];
+        ZSSBarButtonItem *insertLink = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSlink@2x.png" inBundle:bundle compatibleWithTraitCollection:nil] style:UIBarButtonItemStylePlain target:self action:@selector(insertLink)];
         insertLink.label = @"link";
         if (customOrder) {
             [items replaceObjectAtIndex:[_enabledToolbarItems indexOfObject:ZSSRichTextEditorToolbarInsertLink] withObject:insertLink];
@@ -1212,7 +1212,7 @@ int textColorBGTag = 0;
     
     // Save the selection location
     [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.prepareInsert();"];
-    if (textColorTag > 3) {
+    if (textColorTag == 1) {
         textColorTag = 0;
     } else {
         textColorTag += 1;
@@ -1221,11 +1221,7 @@ int textColorBGTag = 0;
     
     if (textColorTag == 1)  {
         [self setSelectedColor:UIColor.redColor tag:1];
-    } else if (textColorTag == 2) {
-        [self setSelectedColor:UIColor.greenColor tag:1];
-    } else if (textColorTag == 3) {
-        [self setSelectedColor:UIColor.blueColor tag:1];
-    } else {
+    }  else {
         [self setSelectedColor:UIColor.blackColor tag:1];
     }
 //    // Call the picker
@@ -1241,20 +1237,16 @@ int textColorBGTag = 0;
     
     // Save the selection location
     [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.prepareInsert();"];
-    if (textColorBGTag > 3) {
+    if (textColorBGTag == 1) {
         textColorBGTag = 0;
     } else {
         textColorBGTag += 1;
     }
     
     if (textColorBGTag == 1)  {
-        [self setSelectedColor:UIColor.redColor tag:1];
-    } else if (textColorBGTag == 2) {
-        [self setSelectedColor:UIColor.greenColor tag:1];
-    } else if (textColorBGTag == 3) {
-        [self setSelectedColor:UIColor.blueColor tag:1];
-    } else {
-        [self setSelectedColor:UIColor.blackColor tag:1];
+        [self setSelectedColor:UIColor.yellowColor tag:2];
+    }  else {
+        [self setSelectedColor:UIColor.whiteColor tag:2];
     }
     
 //    // Call the picker
