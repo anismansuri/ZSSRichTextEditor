@@ -233,6 +233,8 @@ static Class hackishFixClass = Nil;
 //Scale image from device
 static CGFloat kJPEGCompression = 0.8;
 static CGFloat kDefaultScale = 0.5;
+int textColorTag = 0;
+int textColorBGTag = 0;
 
 #pragma mark - View Did Load Section
 - (void)viewDidLoad {
@@ -372,7 +374,7 @@ static CGFloat kDefaultScale = 0.5;
 
 - (void)createToolBarScroll {
     
-    self.toolBarScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [self isIpad] ? self.view.frame.size.width : self.view.frame.size.width - 44, 44)];
+    self.toolBarScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [self isIpad] ? self.view.frame.size.width : self.view.frame.size.width, 44)];
     self.toolBarScroll.backgroundColor = [UIColor clearColor];
     self.toolBarScroll.showsHorizontalScrollIndicator = NO;
     
@@ -1210,13 +1212,28 @@ static CGFloat kDefaultScale = 0.5;
     
     // Save the selection location
     [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.prepareInsert();"];
+    if (textColorTag > 3) {
+        textColorTag = 0;
+    } else {
+        textColorTag += 1;
+    }
     
-    // Call the picker
-    HRColorPickerViewController *colorPicker = [HRColorPickerViewController cancelableFullColorPickerViewControllerWithColor:[UIColor whiteColor]];
-    colorPicker.delegate = self;
-    colorPicker.tag = 1;
-    colorPicker.title = NSLocalizedString(@"Text Color", nil);
-    [self.navigationController pushViewController:colorPicker animated:YES];
+    
+    if (textColorTag == 1)  {
+        [self setSelectedColor:UIColor.redColor tag:1];
+    } else if (textColorTag == 2) {
+        [self setSelectedColor:UIColor.greenColor tag:1];
+    } else if (textColorTag == 3) {
+        [self setSelectedColor:UIColor.blueColor tag:1];
+    } else {
+        [self setSelectedColor:UIColor.blackColor tag:1];
+    }
+//    // Call the picker
+//    HRColorPickerViewController *colorPicker = [HRColorPickerViewController cancelableFullColorPickerViewControllerWithColor:[UIColor whiteColor]];
+//    colorPicker.delegate = self;
+//    colorPicker.tag = 1;
+//    colorPicker.title = NSLocalizedString(@"Text Color", nil);
+//    [self.navigationController pushViewController:colorPicker animated:YES];
     
 }
 
@@ -1224,13 +1241,28 @@ static CGFloat kDefaultScale = 0.5;
     
     // Save the selection location
     [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.prepareInsert();"];
+    if (textColorBGTag > 3) {
+        textColorBGTag = 0;
+    } else {
+        textColorBGTag += 1;
+    }
     
-    // Call the picker
-    HRColorPickerViewController *colorPicker = [HRColorPickerViewController cancelableFullColorPickerViewControllerWithColor:[UIColor whiteColor]];
-    colorPicker.delegate = self;
-    colorPicker.tag = 2;
-    colorPicker.title = NSLocalizedString(@"BG Color", nil);
-    [self.navigationController pushViewController:colorPicker animated:YES];
+    if (textColorBGTag == 1)  {
+        [self setSelectedColor:UIColor.redColor tag:1];
+    } else if (textColorBGTag == 2) {
+        [self setSelectedColor:UIColor.greenColor tag:1];
+    } else if (textColorBGTag == 3) {
+        [self setSelectedColor:UIColor.blueColor tag:1];
+    } else {
+        [self setSelectedColor:UIColor.blackColor tag:1];
+    }
+    
+//    // Call the picker
+//    HRColorPickerViewController *colorPicker = [HRColorPickerViewController cancelableFullColorPickerViewControllerWithColor:[UIColor whiteColor]];
+//    colorPicker.delegate = self;
+//    colorPicker.tag = 2;
+//    colorPicker.title = NSLocalizedString(@"BG Color", nil);
+//    [self.navigationController pushViewController:colorPicker animated:YES];
     
 }
 
