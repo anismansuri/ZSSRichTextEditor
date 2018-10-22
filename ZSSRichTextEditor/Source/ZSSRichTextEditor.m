@@ -14,7 +14,7 @@
 #import "ZSSTextView.h"
 
 @import JavaScriptCore;
-
+//Drashti 
 
 /**
  
@@ -398,7 +398,7 @@ static CGFloat kDefaultScale = 0.5;
     self.toolbarHolder = [[UIView alloc] init];
     
     if (_alwaysShowToolbar) {
-        self.toolbarHolder.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+        self.toolbarHolder.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 44);
     } else {
         self.toolbarHolder.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 44);
     }
