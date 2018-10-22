@@ -270,7 +270,7 @@ static CGFloat kDefaultScale = 0.5;
     //Parent holding view
     [self createParentHoldingView];
     
-    //Hide Keyboard
+ /* //Hide Keyboard
     if (![self isIpad]) {
         
         // Toolbar holder used to crop and position toolbar
@@ -291,7 +291,7 @@ static CGFloat kDefaultScale = 0.5;
         line.alpha = 0.7f;
         [toolbarCropper addSubview:line];
         
-    }
+    }*/
     
     [self.view addSubview:self.toolbarHolder];
     
@@ -315,7 +315,7 @@ static CGFloat kDefaultScale = 0.5;
     //Add observers for keyboard showing or hiding notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowOrHide:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowOrHide:) name:UIKeyboardWillHideNotification object:nil];
-
+    
 }
 
 #pragma mark - View Will Disappear Section
@@ -934,7 +934,7 @@ static CGFloat kDefaultScale = 0.5;
     
     //Call the setPlaceholder javascript method if a placeholder has been set
     if (self.placeholder != NULL && [self.placeholder length] != 0) {
-    
+        
         NSString *js = [NSString stringWithFormat:@"zss_editor.setPlaceholder(\"%@\");", self.placeholder];
         [self.editorView stringByEvaluatingJavaScriptFromString:js];
         
@@ -1151,7 +1151,7 @@ static CGFloat kDefaultScale = 0.5;
 }
 
 - (void)showFontsPicker {
-        
+    
     // Save the selection location
     [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.prepareInsert();"];
     
@@ -1167,41 +1167,41 @@ static CGFloat kDefaultScale = 0.5;
     NSString *fontFamilyString;
     
     switch (fontFamily) {
-        case ZSSFontFamilyDefault:
+            case ZSSFontFamilyDefault:
             fontFamilyString = @"Arial, Helvetica, sans-serif";
             break;
-        
-        case ZSSFontFamilyGeorgia:
+            
+            case ZSSFontFamilyGeorgia:
             fontFamilyString = @"Georgia, serif";
             break;
-        
-        case ZSSFontFamilyPalatino:
+            
+            case ZSSFontFamilyPalatino:
             fontFamilyString = @"Palatino Linotype, Book Antiqua, Palatino, serif";
             break;
-        
-        case ZSSFontFamilyTimesNew:
+            
+            case ZSSFontFamilyTimesNew:
             fontFamilyString = @"Times New Roman, Times, serif";
             break;
-        
-        case ZSSFontFamilyTrebuchet:
+            
+            case ZSSFontFamilyTrebuchet:
             fontFamilyString = @"Trebuchet MS, Helvetica, sans-serif";
             break;
-        
-        case ZSSFontFamilyVerdana:
+            
+            case ZSSFontFamilyVerdana:
             fontFamilyString = @"Verdana, Geneva, sans-serif";
             break;
-        
-        case ZSSFontFamilyCourierNew:
+            
+            case ZSSFontFamilyCourierNew:
             fontFamilyString = @"Courier New, Courier, monospace";
             break;
-        
+            
         default:
             fontFamilyString = @"Arial, Helvetica, sans-serif";
             break;
     }
     
     NSString *trigger = [NSString stringWithFormat:@"zss_editor.setFontFamily(\"%@\");", fontFamilyString];
-
+    
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
     
 }
@@ -1527,12 +1527,12 @@ static CGFloat kDefaultScale = 0.5;
         [alertController addAction:[UIAlertAction actionWithTitle:insertButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             UITextField *textFieldAlt = [alertController.textFields objectAtIndex:0];
             UITextField *textFieldScale = [alertController.textFields objectAtIndex:1];
-
+            
             self.selectedImageScale = [textFieldScale.text floatValue]?:kDefaultScale;
             self.selectedImageAlt = textFieldAlt.text?:@"";
             
             [self presentViewController:self.imagePicker animated:YES completion:nil];
-
+            
         }]];
         
         [self presentViewController:alertController animated:YES completion:NULL];
@@ -1684,12 +1684,12 @@ static CGFloat kDefaultScale = 0.5;
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     self.editorLoaded = YES;
-
+    
     if (!self.internalHTML) {
         self.internalHTML = @"";
     }
     [self updateHTML];
-
+    
     if(self.placeholder) {
         [self setPlaceholderText];
     }
@@ -1697,7 +1697,7 @@ static CGFloat kDefaultScale = 0.5;
     if (self.customCSS) {
         [self updateCSS];
     }
-
+    
     if (self.shouldShowKeyboard) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self focusTextEditor];
@@ -1740,7 +1740,7 @@ static CGFloat kDefaultScale = 0.5;
         lastWord = [text substringFromIndex:range.location];
         
         if (lastWord != nil) {
-        
+            
             //Check if last word typed starts with a #
             NSRegularExpression *hashtagRegex = [NSRegularExpression regularExpressionWithPattern:@"#(\\w+)" options:0 error:nil];
             NSArray *hashtagMatches = [hashtagRegex matchesInString:lastWord options:0 range:NSMakeRange(0, lastWord.length)];
@@ -1825,7 +1825,7 @@ static CGFloat kDefaultScale = 0.5;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-
+    
     if (alertView.tag == 1) {
         if (buttonIndex == 1) {
             UITextField *imageURL = [alertView textFieldAtIndex:0];
@@ -1855,7 +1855,7 @@ static CGFloat kDefaultScale = 0.5;
             self.selectedImageAlt = textFieldAlt.text?:@"";
             
             [self presentViewController:self.imagePicker animated:YES completion:nil];
-
+            
         }
     }
 }
@@ -1880,7 +1880,7 @@ static CGFloat kDefaultScale = 0.5;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info{
-
+    
     UIImage *selectedImage = info[UIImagePickerControllerEditedImage]?:info[UIImagePickerControllerOriginalImage];
     
     //Scale the image
@@ -1889,7 +1889,7 @@ static CGFloat kDefaultScale = 0.5;
     [selectedImage drawInRect:CGRectMake(0,0,targetSize.width,targetSize.height)];
     UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-
+    
     //Compress the image, as it is going to be encoded rather than linked
     NSData *scaledImageData = UIImageJPEGRepresentation(scaledImage, kJPEGCompression);
     
@@ -1904,7 +1904,7 @@ static CGFloat kDefaultScale = 0.5;
     }
     
     self.imageBase64String = imageBase64String;
-
+    
     //Dismiss the Image Picker
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
